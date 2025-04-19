@@ -8,13 +8,28 @@ function logStep(msg) {
   logList.scrollTop = logList.scrollHeight;
 }
 
+function chooseMode(mode) {
+  document.getElementById("initial-choice").classList.add("hidden");
+  document.getElementById("logList").innerHTML = '';
+
+  if (mode === 'random') {
+    const count = Math.floor(Math.random() * 6) + 3; // 3 to 8 values
+    array = Array.from({ length: count }, () => Math.floor(Math.random() * 90 + 10));
+    drawArray(array);
+    logStep("🎲 Random array generated: [" + array.join(", ") + "]");
+    quickSortHandler();
+  } else {
+    document.getElementById("custom-form").classList.remove("hidden");
+  }
+}
+
 function generateInputFields() {
   const count = parseInt(document.getElementById("numElements").value);
   const container = document.getElementById("elementInputs");
   container.innerHTML = "";
 
-  if (isNaN(count) || count <= 1) {
-    alert("Enter a valid number (min: 2)");
+  if (isNaN(count) || count < 2 || count > 8) {
+    alert("Please enter a number between 2 and 8.");
     return;
   }
 
@@ -25,26 +40,8 @@ function generateInputFields() {
     input.classList.add("elementInput");
     container.appendChild(input);
   }
-}
 
-function generateRandomArray() {
-  const count = parseInt(document.getElementById("numElements").value);
-  const container = document.getElementById("elementInputs");
-  container.innerHTML = "";
-
-  if (isNaN(count) || count <= 1) {
-    alert("Enter a valid number (min: 2)");
-    return;
-  }
-
-  for (let i = 0; i < count; i++) {
-    const val = Math.floor(Math.random() * 100) + 1;
-    const input = document.createElement("input");
-    input.type = "number";
-    input.value = val;
-    input.classList.add("elementInput");
-    container.appendChild(input);
-  }
+  document.getElementById("action-buttons").classList.remove("hidden");
 }
 
 function createArray() {
@@ -62,7 +59,7 @@ function createArray() {
 
   drawArray(array);
   document.getElementById("logList").innerHTML = '';
-  logStep("✅ Array created: [" + array.join(', ') + "]");
+  logStep("✅ Custom array created: [" + array.join(', ') + "]");
 }
 
 function drawArray(arr) {
@@ -105,11 +102,11 @@ async function partition(arr, low, high) {
   const pivot = arr[high];
   let i = low - 1;
 
-  bars[high].style.backgroundColor = "orange";
+  bars[high].style.backgroundColor = "#ff4081";
   logStep(`🟠 Partitioning with pivot ${pivot}`);
 
   for (let j = low; j <= high - 1; j++) {
-    bars[j].style.backgroundColor = "yellow";
+    bars[j].style.backgroundColor = "#ffee58";
     logStep(`🔍 Comparing ${arr[j]} with ${pivot}`);
     await sleep(300);
 
@@ -120,14 +117,14 @@ async function partition(arr, low, high) {
       logStep(`🔄 Swapped ${arr[i]} and ${arr[j]}`);
       await sleep(300);
     }
-    bars[j].style.backgroundColor = "#0ff";
+    bars[j].style.backgroundColor = "#4fc3f7";
   }
 
   [arr[i + 1], arr[high]] = [arr[high], arr[i + 1]];
   swapBars(i + 1, high);
   logStep(`✅ Swapped pivot ${pivot} to position ${i + 1}`);
   await sleep(300);
-  bars[high].style.backgroundColor = "#0ff";
+  bars[high].style.backgroundColor = "#4fc3f7";
 
   return i + 1;
 }
