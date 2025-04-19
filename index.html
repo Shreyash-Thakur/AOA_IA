@@ -1,37 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quick Sort Visualizer</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Quick Sort Visual Simulator</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="container">
-    <h1>✨ Quick Sort Visual Simulator</h1>
+  <h1>✨ Quick Sort Visual Simulator</h1>
 
-    <div class="controls">
-      <div class="input-group">
-        <label>Number of Elements:</label>
-        <input type="number" id="numElements" placeholder="e.g. 5" min="2" />
-        <button onclick="generateInputFields()">Custom Input</button>
-        <button onclick="generateRandomArray()">Generate Random</button>
-      </div>
+  <!-- Top Buttons -->
+  <div class="controls" id="main-controls">
+    <button class="glow-btn" onclick="chooseCustom()">✍️ Custom Input</button>
+    <button class="glow-btn" onclick="generateRandomArray()">🔁 Generate Random</button>
+  </div>
 
-      <div id="elementInputs" class="input-fields"></div>
+  <!-- Custom Input Step 1 -->
+  <div class="controls hidden" id="custom-input-controls">
+    <label>Number of Elements:</label>
+    <input type="number" id="numElements" placeholder="e.g. 5" min="1" />
+    <button class="glow-btn" onclick="showCustomFields()">Continue</button>
+  </div>
 
-      <div class="action-buttons">
-        <button onclick="createArray()">Generate Array</button>
-        <button onclick="quickSortHandler()">Start Quick Sort</button>
-      </div>
-    </div>
+  <!-- Custom Input Step 2 -->
+  <div id="customInputFields" class="input-fields hidden"></div>
 
-    <div id="array" class="array-container"></div>
+  <!-- Custom Array Control Buttons -->
+  <div class="controls hidden" id="custom-action-buttons">
+    <button class="glow-btn" onclick="createArray()">Generate Array</button>
+  </div>
 
-    <div class="log-panel">
-      <h2>📜 Step Log</h2>
-      <ul id="logList"></ul>
-    </div>
+  <!-- Sorting Control Buttons (no extra random button here) -->
+  <div class="controls hidden" id="sorting-buttons">
+    <button class="glow-btn" onclick="startQuickSort()">▶️ Start Quick Sort</button>
+    <button class="glow-btn danger" onclick="stopSorting()">🛑 Stop Sorting</button>
+  </div>
+
+  <!-- Pivot & Status -->
+  <div id="statusMessage" class="status-message hidden"></div>
+
+  <!-- Bars Container -->
+  <div class="array-container" id="arrayContainer"></div>
+
+  <!-- Log Section -->
+  <div class="log-panel">
+    <h2>📜 Step Log</h2>
+    <ul id="logList"></ul>
   </div>
 
   <script src="script.js"></script>
