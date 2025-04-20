@@ -3,7 +3,7 @@
 An interactive visual simulator of the Quick Sort algorithm built using **HTML, CSS, and JavaScript**.
 
 ## 🔍 Features
-- 🎲 Random array generation (max 8 elements)
+- 🎲 Random array generation (max 14 elements)
 - ✍️ Custom input mode
 - 🎨 Beautiful glowing UI with smooth animations
 - 📜 Step-by-step sorting log (comparisons, swaps, pivot placements)
