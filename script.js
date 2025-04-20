@@ -21,8 +21,8 @@ function generateRandomArray() {
   sortedIndices = [];
   array = Array.from({ length: 14 }, () => Math.floor(Math.random() * 90 + 10));
   drawArray(array);
-  logStep("🎲 Random array generated: [" + array.join(", ") + "]");
-  showStatusMessage("🎲 Random array of 14 elements ready!");
+  logStep("Random array generated: [" + array.join(", ") + "]");
+  showStatusMessage("Random array of 14 elements ready!");
 
   document.getElementById("custom-input-controls").classList.add("hidden");
   document.getElementById("customInputFields").classList.add("hidden");
@@ -115,8 +115,8 @@ function drawArray(arr, pivotIndex = -1, compareIndex = -1, sorted = []) {
 
 function stopSorting() {
   stopRequested = true;
-  showStatusMessage("🛑 Sorting stopped.");
-  logStep("🛑 Sorting was manually stopped.");
+  showStatusMessage("Sorting stopped.");
+  logStep("Sorting was manually stopped.");
 }
 
 async function startQuickSort() {
@@ -147,8 +147,8 @@ async function quickSort(arr, low, high) {
 
 async function partition(arr, low, high) {
   const pivot = arr[high];
-  showStatusMessage(`📌 Current pivot: ${pivot}`);
-  logStep(`🟠 Partitioning with pivot ${pivot}`);
+  showStatusMessage(`Current pivot: ${pivot}`);
+  logStep(`Partitioning with pivot ${pivot}`);
 
   let i = low - 1;
 
@@ -169,7 +169,7 @@ async function partition(arr, low, high) {
   }
 
   [arr[i + 1], arr[high]] = [arr[high], arr[i + 1]];
-  logStep(`✅ Swapped pivot ${pivot} to position ${i + 1}`);
+  logStep(`Swapped pivot ${pivot} to position ${i + 1}`);
   sortedIndices.push(i + 1);
   drawArray(arr, -1, -1, sortedIndices);
   await sleep(400);
